@@ -1,0 +1,235 @@
+:root {
+    --primary: #00d4ff;
+    --dark: #121212;
+    --light-gray: #1f1f1f;
+    --text: #ffffff;
+    --text-dim: #a0a0a0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--dark);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+}
+
+/* Navigasiya */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 5%;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--primary);
+}
+
+.nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    margin-left: 2rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.nav-links a:hover { color: var(--primary); }
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.hero h1 {
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+}
+
+.hero p {
+    color: var(--text-dim);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.car-container img {
+    max-width: 80%;
+    border-radius: 20px;
+    filter: drop-shadow(0 20px 50px rgba(0, 212, 255, 0.2));
+    transition: 0.5s ease;
+}
+
+/* Bölmələr */
+.section {
+    padding: 100px 10%;
+}
+
+.gray-bg { background-color: var(--light-gray); }
+
+.title {
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 2.5rem;
+    position: relative;
+}
+
+.title::after {
+    content: '';
+    width: 50px;
+    height: 3px;
+    background: var(--primary);
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Grid Sistemi */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* Texnologiya Kartları */
+.tech-card {
+    background: #1a1a1a;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid #333;
+    transition: 0.3s;
+}
+
+.tech-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-5px);
+}
+
+.tech-card i {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+/* Komanda Bölməsi */
+.team-member {
+    text-align: center;
+}
+
+.member-img {
+    width: 150px;
+    height: 150px;
+    background: #333;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    border: 2px solid var(--primary);
+}
+
+.team-member h4 { margin-bottom: 5px; }
+.team-member p { color: var(--text-dim); font-size: 0.9rem; }
+
+footer {
+    padding: 40px;
+    text-align: center;
+    border-top: 1px solid #222;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+}
+
+/* Mobil və Planşet Uyğunluğu */
+@media (max-width: 992px) {
+    .hero h1 {
+        font-size: 4rem; /* Planşet üçün yazı ölçüsü */
+    }
+    
+    .car-container img {
+        max-width: 95%; /* Maşın şəkli daha geniş görünsün */
+    }
+}
+
+@media (max-width: 768px) {
+    /* Navigasiya mobil görünüşü */
+    nav {
+        flex-direction: column;
+        padding: 1.5rem 0;
+    }
+
+    .nav-links {
+        margin-top: 15px;
+        display: flex;
+        gap: 15px;
+    }
+
+    .nav-links a {
+        margin: 0;
+        font-size: 0.8rem;
+    }
+
+    /* Hero hissəsi mobil üçün */
+    .hero {
+        padding-top: 150px;
+        height: auto;
+        padding-bottom: 50px;
+    }
+
+    .hero h1 {
+        font-size: 2.8rem; /* Mobil üçün daha kiçik başlıq */
+        letter-spacing: 5px;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        padding: 0 10%;
+    }
+
+    /* Gridləri bir sütun halına salırıq */
+    .grid {
+        grid-template-columns: 1fr; /* Kartlar alt-alta */
+        gap: 20px;
+    }
+
+    .section {
+        padding: 60px 5%;
+    }
+
+    .title {
+        font-size: 1.8rem;
+    }
+
+    /* Komanda şəkillərini bir az kiçildək */
+    .member-img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/* Çox kiçik ekranlar (məs: iPhone SE) */
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .tech-card {
+        padding: 25px;
+    }
+}
