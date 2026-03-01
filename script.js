@@ -1,5 +1,5 @@
 const observerOptions = {
-    threshold: 0.2
+    threshold: 0.1
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -11,9 +11,10 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-document.querySelectorAll('.tech-card, .team-member').forEach(el => {
+// Animasiya olunacaq elementləri seçirik
+document.querySelectorAll('.tech-card, .team-member, .gallery-item, .tech-highlight').forEach(el => {
     el.style.opacity = "0";
-    el.style.transform = "translateY(30px)";
-    el.style.transition = "all 0.6s ease-out";
+    el.style.transform = "translateY(40px)";
+    el.style.transition = "all 0.8s ease-out";
     observer.observe(el);
 });

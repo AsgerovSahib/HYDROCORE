@@ -1,9 +1,10 @@
 :root {
     --primary: #00d4ff;
-    --dark: #121212;
-    --light-gray: #1f1f1f;
+    --dark: #0a0a0b;
+    --light-gray: #151517;
     --text: #ffffff;
     --text-dim: #a0a0a0;
+    --accent-blue: #0072ff;
 }
 
 * {
@@ -15,8 +16,9 @@
 body {
     background-color: var(--dark);
     color: var(--text);
-    font-family: 'Inter', -apple-system, sans-serif;
+    font-family: 'Inter', sans-serif;
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 /* Navigasiya */
@@ -24,14 +26,28 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem 5%;
-    position: absolute;
+    padding: 1.5rem 5%;
+    position: fixed; /* Daha professional görünüş üçün fixed */
     width: 100%;
-    z-index: 10;
+    z-index: 100;
+    background: rgba(10, 10, 11, 0.8);
+    backdrop-filter: blur(10px);
 }
 
-.logo {
-    font-size: 1.5rem;
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+.logo-text {
+    font-size: 1.4rem;
     font-weight: 800;
     letter-spacing: 2px;
     color: var(--primary);
@@ -41,7 +57,8 @@ nav {
     color: var(--text);
     text-decoration: none;
     margin-left: 2rem;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 600;
     text-transform: uppercase;
     transition: 0.3s;
 }
@@ -50,186 +67,169 @@ nav {
 
 /* Hero Section */
 .hero {
-    height: 100vh;
+    height: 120vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: 100px;
+    background: radial-gradient(circle at center, #112233 0%, var(--dark) 70%);
 }
 
 .hero h1 {
-    font-size: clamp(3rem, 10vw, 6rem);
+    font-size: clamp(3.5rem, 12vw, 7rem);
     font-weight: 900;
+    letter-spacing: -2px;
     margin-bottom: 0.5rem;
+    background: linear-gradient(to bottom, #fff, var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.hero p {
-    color: var(--text-dim);
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+.car-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .car-container img {
-    max-width: 80%;
-    border-radius: 20px;
-    filter: drop-shadow(0 20px 50px rgba(0, 212, 255, 0.2));
-    transition: 0.5s ease;
+    width: 70%;
+    max-width: 900px;
+    filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.3));
+    animation: float 4s ease-in-out infinite;
 }
 
-/* Bölmələr */
-.section {
-    padding: 100px 10%;
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
 }
 
-.gray-bg { background-color: var(--light-gray); }
+/* Tech Section */
+.section { padding: 100px 10%; }
 
-.title {
+.tech-highlight {
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+    padding: 30px;
+    border-left: 4px solid var(--primary);
+    border-right: 4px solid var(--primary);
     text-align: center;
+    margin-bottom: 50px;
+}
+
+.tech-highlight p {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--primary);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Gallery - Şəkillərin kəsilməməsi üçün */
+.tech-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
     margin-bottom: 60px;
-    font-size: 2.5rem;
-    position: relative;
 }
 
-.title::after {
-    content: '';
-    width: 50px;
-    height: 3px;
-    background: var(--primary);
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-}
 
-/* Grid Sistemi */
+
+.gallery-item:hover img { transform: scale(1.1); }
+
+/* Grid & Cards */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
 }
 
-/* Texnologiya Kartları */
 .tech-card {
-    background: #1a1a1a;
+    background: var(--light-gray);
     padding: 40px;
-    border-radius: 15px;
-    text-align: center;
-    border: 1px solid #333;
+    border-radius: 4px; /* Daha kəskin mühəndislik dizaynı */
+    border-bottom: 3px solid transparent;
     transition: 0.3s;
 }
 
 .tech-card:hover {
-    border-color: var(--primary);
-    transform: translateY(-5px);
+    border-bottom-color: var(--primary);
+    background: #1c1c1f;
 }
 
-.tech-card i {
-    font-size: 2.5rem;
-    color: var(--primary);
-    margin-bottom: 20px;
-}
-
-/* Komanda Bölməsi */
-.team-member {
-    text-align: center;
-}
-
-.member-img {
-    width: 150px;
-    height: 150px;
-    background: #333;
-    border-radius: 50%;
+/* Team Section - Düzəliş edilmiş */
+.member-img-wrapper {
+    width: 180px;
+    height: 180px;
     margin: 0 auto 20px;
-    border: 2px solid var(--primary);
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--primary);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
 }
 
-.team-member h4 { margin-bottom: 5px; }
-.team-member p { color: var(--text-dim); font-size: 0.9rem; }
-
-footer {
-    padding: 40px;
-    text-align: center;
-    border-top: 1px solid #222;
-    color: var(--text-dim);
-    font-size: 0.8rem;
+.member-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-/* Mobil və Planşet Uyğunluğu */
-@media (max-width: 992px) {
-    .hero h1 {
-        font-size: 4rem; /* Planşet üçün yazı ölçüsü */
-    }
-    
-    .car-container img {
-        max-width: 95%; /* Maşın şəkli daha geniş görünsün */
-    }
-}
+.team-member h4 { font-size: 1.3rem; margin-top: 10px; }
 
+/* Mobil Uyğunluq */
 @media (max-width: 768px) {
-    /* Navigasiya mobil görünüşü */
-    nav {
-        flex-direction: column;
-        padding: 1.5rem 0;
-    }
-
-    .nav-links {
-        margin-top: 15px;
-        display: flex;
-        gap: 15px;
-    }
-
-    .nav-links a {
-        margin: 0;
-        font-size: 0.8rem;
-    }
-
-    /* Hero hissəsi mobil üçün */
-    .hero {
-        padding-top: 150px;
-        height: auto;
-        padding-bottom: 50px;
-    }
-
-    .hero h1 {
-        font-size: 2.8rem; /* Mobil üçün daha kiçik başlıq */
-        letter-spacing: 5px;
-    }
-
-    .hero p {
-        font-size: 1rem;
-        padding: 0 10%;
-    }
-
-    /* Gridləri bir sütun halına salırıq */
-    .grid {
-        grid-template-columns: 1fr; /* Kartlar alt-alta */
-        gap: 20px;
-    }
-
-    .section {
-        padding: 60px 5%;
-    }
-
-    .title {
-        font-size: 1.8rem;
-    }
-
-    /* Komanda şəkillərini bir az kiçildək */
-    .member-img {
-        width: 120px;
-        height: 120px;
-    }
+    nav { flex-direction: column; padding: 1rem; }
+    .nav-links { margin-top: 10px; }
+    .nav-links a { margin: 0 10px; font-size: 0.75rem; }
+    
+    .tech-gallery { grid-template-columns: 1fr; } /* Mobildə şəkillər alt-alta */
+    .tech-highlight p { font-size: 0.9rem; }
+    
+    .hero h1 { font-size: 3rem; }
+    .car-container img { width: 90%; }
 }
 
-/* Çox kiçik ekranlar (məs: iPhone SE) */
-@media (max-width: 480px) {
-    .hero h1 {
-        font-size: 2.2rem;
+/* Texnoloji Qalereya Bölməsi */
+.tech-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Masaüstündə 3 şəkil yanaşı */
+    gap: 20px;
+    margin-bottom: 60px;
+    align-items: center; /* Şəkillərin hündürlüyü fərqli olsa belə mərkəzləyir */
+}
+
+.gallery-item {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.02); /* Arxa fon şəklin ətrafında boşluq olsa, pis görünməsin deyə */
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto; /* Şəklin orijinal nisbətini qoruyur */
+    display: block;
+    object-fit: contain; /* ƏN VACİB HİSSƏ: Şəkli kəsmir, qutuya sığdırır */
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.03); /* Hover zamanı çox az böyümə effekti */
+}
+
+/* MOBİL VERSİYA (Telefonlar üçün) */
+@media (max-width: 768px) {
+    .tech-gallery {
+        grid-template-columns: 1fr; /* Mobildə şəkillər tək-tək alt-alta */
+        gap: 30px; /* Aralarındakı məsafəni bir az artıraq */
     }
     
-    .tech-card {
-        padding: 25px;
+    .gallery-item {
+        max-width: 100%;
     }
 }
